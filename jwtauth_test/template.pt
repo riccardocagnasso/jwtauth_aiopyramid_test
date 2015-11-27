@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        //yeah i know this is ugly
+        var token = "${token}";
+        console.log(token);
+
+        $.ajax({
+            url: '/secure',
+        })
+        .fail(function(r){
+            if(r.status == 403){
+                console.log('yup it failed');
+                $("#placeholder1").html("Witouth token it fails");
+            }
+        });
+
+        $.ajax({
+            url: '/secure',
+            headers: {
+                Authorization: 'JWT token="' + token + '"'
+            }
+        })
+        .fail(function(r){
+            if(r.status == 403){
+                console.log('yup it failed');
+                $("#placeholder2").html("It fails even with token!");
+            }
+        })
+        .success(function(r){
+            $("#placeholder2").html("And with token it works");
+        });
+    </script>
+  </head>
+  <body>
+    <p>HELLO WORLD</p>
+    <p>${token}</p>
+    <p>${username}</p>
+
+    <div id="placeholder1"></div>
+    <div id="placeholder2"></div>
+  </body>
+</html>

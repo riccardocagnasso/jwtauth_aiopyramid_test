@@ -17,7 +17,8 @@ with open(os.path.join(here, 'CHANGES.rst')) as changes:
 
 requires = [
     'aiopyramid[gunicorn]',
-    'pyramid_jwtauth'
+    'pyramid_jwtauth',
+    'pyramid_chameleon'
 ]
 
 setup(
